@@ -1,0 +1,1 @@
+worker: java src/main/java/me/samuelgsouza/dracopricebot/main/Bot.java
