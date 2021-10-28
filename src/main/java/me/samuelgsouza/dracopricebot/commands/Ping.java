@@ -9,6 +9,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class Ping extends ListenerAdapter {
 
+    public Ping(){
+
+    }
+
     String prefix = Config.get("prefix");
 
     @Override

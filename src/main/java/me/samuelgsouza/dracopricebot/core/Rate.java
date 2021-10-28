@@ -15,7 +15,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Rate {
-    DecimalFormat df = new DecimalFormat("#,##0.00");
+
+    public Rate() {
+
+    }
+
+    private final DecimalFormat df = new DecimalFormat("#,##0.00");
 
     public JSONObject getRate() {
         HttpRequest request = HttpRequest.newBuilder()

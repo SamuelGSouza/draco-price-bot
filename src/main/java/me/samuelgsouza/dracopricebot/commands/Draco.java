@@ -10,6 +10,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class Draco extends ListenerAdapter {
 
+    public Draco() {
+
+    }
+
     String prefix = Config.get("prefix");
 
     @Override

@@ -17,6 +17,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Update extends ListenerAdapter {
 
+    public Update() {
+
+    }
+
     String prefix = Config.get("prefix");
 
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
