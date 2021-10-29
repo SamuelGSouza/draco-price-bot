@@ -1,1 +1,1 @@
-worker: java src/main/java/me/samuelgsouza/dracopricebot/main/Bot.java
+worker: java -jar target/Draco-Price-Bot-1.0-SNAPSHOT-jar-with-dependencies.jar
