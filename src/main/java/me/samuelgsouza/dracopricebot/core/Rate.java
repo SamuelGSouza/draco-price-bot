@@ -20,7 +20,7 @@ public class Rate {
 
     }
 
-    private final DecimalFormat df = new DecimalFormat("#,##0.00");
+    private final DecimalFormat df = new DecimalFormat("#,###0.000");
 
     public JSONObject getRate() {
         HttpRequest request = HttpRequest.newBuilder()
