@@ -36,13 +36,15 @@ public class Update extends ListenerAdapter {
 
             channels.add(event.getChannel().getId());
 
-            textChannel.sendMessage("Este canal receberá atualizações a cada 5 minutos!").queue();
+            textChannel.sendMessage("Este canal receberá atualizações a cada 10 segundos!").queue();
 
         }
 
         if (args[0].equalsIgnoreCase(prefix + "stopupdate")) {
 
-            channels.remove(event.getChannel().getId());
+            channels.removeIf(element -> {
+                return element.startsWith(event.getChannel().getId());
+            });
             textChannel.sendMessage("Este canal não receberá mais atualizações!").queue();
 
         }
@@ -53,16 +55,28 @@ public class Update extends ListenerAdapter {
     public void onReady(@NotNull ReadyEvent event) {
         Runnable r = () -> {
 
-            for(Iterator<String> iter = channels.iterator();
-                iter.hasNext();) {
+            for(String c: channels) {
 
-                String channelId = iter.next();
-                TextChannel channel = event.getJDA().getTextChannelById(channelId);
-                channel.sendMessageEmbeds(new EmbedMessage().defaultMessage()).queue();
+                String array[] = c.split(":");
+                TextChannel channel = event.getJDA().getTextChannelById(array[0]);
+
+                int ChannelIdLenght = 18;
+
+                if (c.length() <= ChannelIdLenght){
+
+                    channel.sendMessageEmbeds(new EmbedMessage().defaultMessage()).queue((message) -> {
+                        channels.add(c + ":" + message.getIdLong());
+                        channels.remove(c);
+                    });
+
+                }else {
+                    channel.editMessageEmbedsById(array[1], new EmbedMessage().defaultMessage()).queue();
+                }
+
             }
 
         };
 
-        executor.scheduleAtFixedRate(r, 1, 5, TimeUnit.MINUTES);
+        executor.scheduleAtFixedRate(r, 1, 10, TimeUnit.SECONDS);
     }
 }
